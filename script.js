@@ -82,3 +82,39 @@ document.querySelectorAll('.product-card, .category-item').forEach(el => {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
+
+// Featured Carousel JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.featured-carousel');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.f-carousel-prev');
+    const nextBtn = document.querySelector('.f-carousel-next');
+    const totalSlides = slides.length;
+    const slidesToShow = 3;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        const translateX = -currentIndex * (100 / slidesToShow);
+        carousel.style.transform = `translateX(${translateX}%)`;
+    }
+
+    function nextSlide() {
+        if (currentIndex < totalSlides - slidesToShow) {
+            currentIndex++;
+            updateCarousel();
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Optional: Auto-slide every 5 seconds
+    // setInterval(nextSlide, 5000);
+});
